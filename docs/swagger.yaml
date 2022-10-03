@@ -1,0 +1,144 @@
+basePath: /api/v1
+definitions:
+  big.Int:
+    type: object
+  config.ResponseObject:
+    properties:
+      body: {}
+      isSuccess:
+        type: boolean
+      message:
+        type: string
+      statusCode:
+        type: integer
+      timeStamp:
+        type: string
+    type: object
+  controller.RequestParam:
+    properties:
+      From:
+        example: 0x46C65D87bE47255882561bcc7CFf3bBA186F0848
+        type: string
+      To:
+        example: 0x5EFC0751759b01759BEc45a06930A2d338a5E234
+        type: string
+      Value:
+        $ref: '#/definitions/big.Int'
+    type: object
+info:
+  contact: {}
+  description: This is a sample mange-template server.
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /token/balanceToken:
+    get:
+      consumes:
+      - application/json
+      description: do BalanceToken
+      parameters:
+      - description: Account Address
+        example: 0x46C65D87bE47255882561bcc7CFf3bBA186F0848
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.ResponseObject'
+        "400":
+          description: Bad Request
+      summary: BalanceToken
+  /token/transactionReceipt:
+    get:
+      consumes:
+      - application/json
+      description: do TransactionReceipt
+      parameters:
+      - description: Hash Address
+        example: 0x81f05c7087dc3fc1ff6576f6303694b803122366e5fba54afd1f526a2f567d56
+        in: query
+        name: hash
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.ResponseObject'
+        "400":
+          description: Bad Request
+      summary: TransactionReceipt
+  /token/transferToken:
+    post:
+      consumes:
+      - application/json
+      description: do TransferToken
+      parameters:
+      - description: To Address, From Address, Value Token
+        in: body
+        name: RequestParam
+        required: true
+        schema:
+          $ref: '#/definitions/controller.RequestParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.ResponseObject'
+        "400":
+          description: Bad Request
+      summary: TransferToken
+  /token/transferTokenCancel:
+    post:
+      consumes:
+      - application/json
+      description: do TransferTokenCancel
+      parameters:
+      - description: To Address, From Address, Value Token
+        in: body
+        name: RequestParam
+        required: true
+        schema:
+          $ref: '#/definitions/controller.RequestParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.ResponseObject'
+        "400":
+          description: Bad Request
+      summary: TransferTokenCancel
+  /token/transferTokenPolling:
+    post:
+      consumes:
+      - application/json
+      description: do TransferTokenPolling
+      parameters:
+      - description: To Address, From Address, Value Token
+        in: body
+        name: RequestParam
+        required: true
+        schema:
+          $ref: '#/definitions/controller.RequestParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.ResponseObject'
+        "400":
+          description: Bad Request
+      summary: TransferTokenPolling
+swagger: "2.0"
